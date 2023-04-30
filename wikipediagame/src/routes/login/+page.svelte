@@ -14,6 +14,18 @@
 
     console.log(email);
     console.log(password);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        localStorage.setItem("uid", user.uid);
+        localStorage.setItem("isLoggedIn", true);
+        goto("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   }
 </script>
 
@@ -39,8 +51,7 @@
       />
 
       <button
-        on:click={login}
-        href="/"
+        on:click={login()}
         class="m-3 text-lg bg-white text-black w-1/3 rounded-lg text-center p-2"
         >Login</button
       >

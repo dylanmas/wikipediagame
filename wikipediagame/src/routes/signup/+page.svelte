@@ -1,14 +1,31 @@
 <script>
-  import firebase from "firebase/app";
+  import { goto } from "$app/navigation";
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+  } from "firebase/auth";
 
-  async function loginWithGoogle() {
-    try {
-      const provider = new firebase.auth.GoogleAuthProvider();
+  const auth = getAuth();
 
-      await firebase.auth().signInWithPopup(provider);
-    } catch (e) {
-      console.log(e);
-    }
+  async function login() {
+    let email = document.getElementById("email-input").value;
+    let password = document.getElementById("pass-input").value;
+
+    console.log(email);
+    console.log(password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        localStorage.setItem("uid", user.uid);
+        localStorage.setItem("isLoggedIn", true);
+        goto("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   }
 </script>
 
@@ -30,12 +47,13 @@
         type="password"
         name="email"
         placeholder="Password"
+        id="pass-input"
       />
 
-      <a
-        href="/"
+      <button
+        on:click={login()}
         class="m-3 text-lg bg-white text-black w-1/3 rounded-lg text-center p-2"
-        >Login</a
+        >Login</button
       >
       <a href="/signup" class="text-small w-1/3 hover p-2 m-3"
         >I Don't Have A Login</a
