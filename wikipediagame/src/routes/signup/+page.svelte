@@ -1,0 +1,45 @@
+<script>
+  import firebase from "firebase/app";
+
+  async function loginWithGoogle() {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      await firebase.auth().signInWithPopup(provider);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+</script>
+
+<div
+  class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transition-in justify-center self-center"
+>
+  <div class="flex flex-col w-screen">
+    <h1 class="m-3 text-4xl">Login</h1>
+    <div class="flex flex-col w-1/3 flex-stretch">
+      <input
+        class="text-black h-auto rounded-lg m-3 p-2"
+        type="email"
+        name="email"
+        id="email-input"
+        placeholder="Email Address"
+      />
+      <input
+        class="text-black rounded-lg m-3 p-2"
+        type="password"
+        name="email"
+        placeholder="Password"
+      />
+
+      <a
+        href="/"
+        class="m-3 text-lg bg-white text-black w-1/3 rounded-lg text-center p-2"
+        >Login</a
+      >
+      <a href="/signup" class="text-small w-1/3 hover p-2 m-3"
+        >I Don't Have A Login</a
+      >
+    </div>
+  </div>
+</div>
