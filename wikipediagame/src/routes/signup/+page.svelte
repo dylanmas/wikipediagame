@@ -1,10 +1,6 @@
 <script>
   import { goto } from "$app/navigation";
-  import {
-    getAuth,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-  } from "firebase/auth";
+  import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
   const auth = getAuth();
 
@@ -55,7 +51,7 @@
         class="m-3 text-lg bg-white text-black w-1/3 rounded-lg text-center p-2"
         >Login</button
       >
-      <a href="/signup" class="text-small w-1/3 hover p-2 m-3"
+      <a href="/signup" class="text-small w-1/2 hover p-2 m-3 text-sm"
         >I Don't Have A Login</a
       >
     </div>
