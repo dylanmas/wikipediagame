@@ -45,7 +45,7 @@
             <div class="w-full flex">
                 <div class="flex flex-col gap-2 w-full">
                     <div class="flex">
-                        <button class="rounded-lg h-96 w-full shadow-md bg-red-500 overflow-clip text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:">
+                        <button class="rounded-lg h-48 w-full shadow-md bg-red-500 overflow-clip text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:">
                             <img class="w-full" src="https://picsum.photos/500/500" />
                         </button>
                         <button class="rounded-lg shadow-md p-4 ml-4 bg-neutral-500 overflow-clip text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:">
@@ -53,8 +53,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
                             </svg>
                         </button>
-                    </div>localhost:3000/execute/starlocalhost:3000/execute/startservertserver
-                    <h1 class="text-5xl">Articlelocalhost:3000/execute/startserver name</h1>
+                    </div>
+                    <h1 class="text-5xl">Article name</h1>
                     <h1 class="text-xl">Article contents and summary</h1>
                 </div>
             </div>
