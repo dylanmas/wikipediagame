@@ -6,10 +6,10 @@ const firebaseConfig = {
   projectId: "wikiroyale-5ffa6",
   storageBucket: "wikiroyale-5ffa6.appspot.com",
   messagingSenderId: "655634975241",
-  appId: "1:655634975241:web:c22550c6d944a1bb3186d8"
+  appId: "1:655634975241:web:c22550c6d944a1bb3186d8",
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const firebase = initializeApp(firebaseConfig);
 
-export default app;
+export default firebase;

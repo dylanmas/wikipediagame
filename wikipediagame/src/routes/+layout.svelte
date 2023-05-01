@@ -1,22 +1,17 @@
 <script>
   import "../app.css";
-  import App from "./fb";
   import { onMount } from "svelte";
+  import firebase from "./fb";
 
-  // import { getAuth, onAuthStateChange } from "firebase/auth";
-  import { getAuth } from "firebase/auth";
-  import { goto } from "$app/navigation";
-
-  // onMount(() => {
-  //   const auth = getAuth();
-  //   onAuthStateChange(auth, (user) => {
-  //     if (user) {
-  //       console.log("user " + user + " is logged in");
-  //     } else {
-  //       goto("/signin");
-  //     }
-  //   });
-  // });
+  onMount(() => {
+    // firebase.auth().onAuthStateChange((user) => {
+    //   if (user) {
+    //     console.log("user " + user + " is logged in");
+    //   } else {
+    //     console.log("Not Logged In");
+    //   }
+    // });
+  });
 </script>
 
 <slot />

@@ -1,12 +1,15 @@
 <script>
   import { goto } from "$app/navigation";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  import firebase from "../fb";
 
   const auth = getAuth();
 
   async function login() {
-    let email = document.getElementById("email-input").value;
-    let password = document.getElementById("pass-input").value;
+    // let email = document.getElementById("email-input").value;
+    // let password = document.getElementById("pass-input").value;
+    let email = "a@b.com";
+    let password = "123456";
 
     console.log(email);
     console.log(password);
@@ -29,7 +32,7 @@
   class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transition-in justify-center self-center"
 >
   <div class="flex flex-col w-screen">
-    <h1 class="m-3 text-4xl">Login</h1>
+    <h1 class="m-3 text-4xl">Sign Up</h1>
     <div class="flex flex-col w-1/3 flex-stretch">
       <input
         class="text-black h-auto rounded-lg m-3 p-2"
@@ -49,10 +52,10 @@
       <button
         on:click={login()}
         class="m-3 text-lg bg-white text-black w-1/3 rounded-lg text-center p-2"
-        >Login</button
+        >Sign Up</button
       >
-      <a href="/signup" class="text-small w-1/2 hover p-2 m-3 text-sm"
-        >I Don't Have A Login</a
+      <a href="/login" class="text-small w-1/2 hover p-2 mb-3 text-sm ml-3"
+        >I Have A Login</a
       >
     </div>
   </div>

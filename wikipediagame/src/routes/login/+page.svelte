@@ -1,6 +1,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+  import firebase from "../fb";
 
   const auth = getAuth();
 
@@ -51,7 +52,7 @@
         class="m-3 text-lg bg-white text-black w-1/3 rounded-lg text-center p-2"
         >Login</button
       >
-      <a href="/signup" class="text-small w-1/2 hover p-2 m-3 text-sm"
+      <a href="/signup" class="text-small w-1/2 hover p-2 mb-3 text-sm ml-3"
         >I Don't Have A Login</a
       >
     </div>
