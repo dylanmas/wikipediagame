@@ -48,7 +48,7 @@
       />
 
       <button
-        on:click={login()}
+        on:click={login}
         class="m-3 text-lg bg-white text-black w-1/3 rounded-lg text-center p-2"
         >Login</button
       >

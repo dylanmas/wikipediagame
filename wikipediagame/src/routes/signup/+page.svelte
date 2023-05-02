@@ -6,10 +6,10 @@
   const auth = getAuth();
 
   async function login() {
-    // let email = document.getElementById("email-input").value;
-    // let password = document.getElementById("pass-input").value;
-    let email = "a@b.com";
-    let password = "123456";
+    let email = document.getElementById("email-input").value;
+    let password = document.getElementById("pass-input").value;
+    // let email = "a@b.com";
+    // let password = "123456";
 
     console.log(email);
     console.log(password);
@@ -24,6 +24,8 @@
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+
+        console.log(errorMessage);
       });
   }
 </script>
@@ -50,7 +52,7 @@
       />
 
       <button
-        on:click={login()}
+        on:click={login}
         class="m-3 text-lg bg-white text-black w-1/3 rounded-lg text-center p-2"
         >Sign Up</button
       >
