@@ -7,6 +7,8 @@
 
   let spin = 2;
   let vel = true;
+  let firebaseAuth = getAuth();
+  let userText = "";
 
   SC.onFrame(() => {
     if (vel) {
@@ -20,9 +22,15 @@
     }
   });
 
-  function goToSignUp() {
-    let firebaseAuth = getAuth();
+  onAuthStateChanged(firebaseAuth, (user) => {
+    if (user) {
+      userText = "User Logged In: " + user.uid;
+    } else {
+      userText = "Click to Log In";
+    }
+  });
 
+  function goToSignUp() {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
         goto("/profile");
@@ -104,9 +112,7 @@
       </div>
     </div>
     <div class="bg-black h-48 rounded-lg shadow-lg p-4 ml-4">
-      <buton on:click={goToSignUp}>
-        <h1 class="">Profile and settings go here</h1>
-      </buton>
+      <buton on:click={goToSignUp} class="">{userText} </buton>
     </div>
   </div>
 
