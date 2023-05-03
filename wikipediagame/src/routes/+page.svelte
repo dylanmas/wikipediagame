@@ -59,12 +59,12 @@
                 </div>
             </div>
         </div>
-        <div class="bg-black h-48 rounded-lg shadow-lg p-4 ml-4">
+        <div class="bg-black backdrop-blur-md bg-opacity-70 h-48 rounded-lg shadow-lg p-4 ml-4">
             <h1 class="">Profile and settings go here</h1>
         </div>
     </div>
 
-    <div class="bg-white text-black rounded-lg shadow-lg p-4 w-full flex flex-col gap-2 mt-auto">
+    <div class="bg-white backdrop-blur-md bg-opacity-70 text-black rounded-lg shadow-lg p-4 w-full flex flex-col gap-2 mt-auto">
         <h1 class="font-bold text-3xl">Play:</h1>
         <div class="flex items-center gap-4">
             <button class="w-96 h-48 rounded-lg shadow-md bg-red-500 overflow-clip p-4 text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:">

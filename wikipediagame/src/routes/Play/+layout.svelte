@@ -78,7 +78,7 @@
       >
         <h1 class="font-bold text-3xl">Article name</h1>
         <div class="flex items-center gap-4">
-        AA
+          
         </div>
       </div>
   </div>
