@@ -24,7 +24,7 @@
 
   onAuthStateChanged(firebaseAuth, (user) => {
     if (user) {
-      userText = "User Logged In: " + user.uid;
+      userText = "User Logged In: " + user.email;
     } else {
       userText = "Click to Log In";
     }
@@ -84,14 +84,10 @@
                 </div>
             </div>
         </div>
-        <div class="bg-black h-48 rounded-lg shadow-lg p-4 ml-4">
-            <h1 class="">Profile and settings go here</h1>
-        </div>
-      </div>
-    </div>
     <div class="bg-black h-48 rounded-lg shadow-lg p-4 ml-4">
       <buton on:click={goToSignUp} class="">{userText} </buton>
     </div>
+      </div>
 
     <div class="bg-white text-black rounded-lg shadow-lg p-4 w-full flex flex-col gap-2 mt-auto">
         <h1 class="font-bold text-3xl">Play:</h1>
@@ -107,4 +103,4 @@
             </button>
         </div>
     </div>
-</div>
+  </div>
