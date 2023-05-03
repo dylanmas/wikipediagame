@@ -18,7 +18,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"firebase": "^9.21.0",
 		"svelte-cubed": "^0.2.1",
+		"sveltestrap": "^5.10.0",
 		"three": "^0.152.0"
 	}
 }

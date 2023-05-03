@@ -1,9 +1,14 @@
 <script>
-	import * as THREE from 'three';
-	import * as SC from 'svelte-cubed';
+  import * as THREE from "three";
+  import * as SC from "svelte-cubed";
+  import firebase from "./fb";
+  import { goto } from "$app/navigation";
+  import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-    let spin = 2;
-    let vel = true;
+  let spin = 2;
+  let vel = true;
+  let firebaseAuth = getAuth();
+  let userText = "";
 
     SC.onFrame(() => {
         if (vel) {
@@ -11,11 +16,31 @@
         } else {
             spin -= 0.001;
         }
+        
+    if (spin >= 3 || spin <= -1) {
+      vel = !vel;
+    }
+  });
 
-        if (spin >= 3 || spin <= -1) {
-            vel = !vel;
-        }
-    })
+  onAuthStateChanged(firebaseAuth, (user) => {
+    if (user) {
+      userText = "User Logged In: " + user.email;
+    } else {
+      userText = "Click to Log In";
+    }
+  });
+
+  function goToSignUp() {
+    onAuthStateChanged(firebaseAuth, (user) => {
+      if (user) {
+        goto("/profile");
+        console.log("User is signed in");
+      } else {
+        goto("/login");
+        console.log("User is signed out");
+      }
+    });
+  }
 </script>
 
 <SC.Canvas antialias background={new THREE.Color("rgb(59, 130, 246)")} fog={new THREE.FogExp2('papayawhip', 2)}>
@@ -59,10 +84,10 @@
                 </div>
             </div>
         </div>
-        <div class="bg-black backdrop-blur-md bg-opacity-70 h-48 rounded-lg shadow-lg p-4 ml-4">
-            <h1 class="">Profile and settings go here</h1>
-        </div>
+    <div class="bg-black h-48 rounded-lg shadow-lg p-4 ml-4">
+      <buton on:click={goToSignUp} class="">{userText} </buton>
     </div>
+      </div>
 
     <div class="bg-white backdrop-blur-md bg-opacity-70 text-black rounded-lg shadow-lg p-4 w-full flex flex-col gap-2 mt-auto">
         <h1 class="font-bold text-3xl">Play:</h1>
@@ -78,4 +103,4 @@
             </button>
         </div>
     </div>
-</div>
+  </div>
