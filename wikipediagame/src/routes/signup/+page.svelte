@@ -1,7 +1,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-  import { getFirestore } from "firebase/firestore";
+  import { getFirestore, collection, addDoc } from "firebase/firestore";
   import firebase from "../fb";
 
   const auth = getAuth();
@@ -11,6 +11,7 @@
     let email = document.getElementById("email-input").value;
     let password = document.getElementById("pass-input").value;
     let passConfirm = document.getElementById("pass-input-confirm").value;
+    let name = document.getElementById("name-input").value;
 
     if (password != passConfirm) {
       console.log("the passwords are different");
@@ -18,11 +19,24 @@
     }
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
         localStorage.setItem("uid", user.uid);
         localStorage.setItem("isLoggedIn", true);
+
+        try {
+          const docRef = await addDoc(collection(db, "users"), {
+            username: name,
+            uid: user.uid,
+            email: email,
+            password: password,
+          });
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+
         goto("/");
       })
       .catch((error) => {
