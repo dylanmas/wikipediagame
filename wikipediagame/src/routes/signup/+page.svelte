@@ -1,18 +1,22 @@
 <script>
   import { goto } from "$app/navigation";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  import { getFirestore } from "firebase/firestore";
   import firebase from "../fb";
 
   const auth = getAuth();
+  const db = getFirestore(app);
 
   async function login() {
     let email = document.getElementById("email-input").value;
     let password = document.getElementById("pass-input").value;
-    // let email = "a@b.com";
-    // let password = "123456";
+    let passConfirm = document.getElementById("pass-input-confirm").value;
 
-    console.log(email);
-    console.log(password);
+    if (password != passConfirm) {
+      console.log("the passwords are different");
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -37,6 +41,13 @@
     <h1 class="m-3 text-4xl">Sign Up</h1>
     <div class="flex flex-col w-1/3 flex-stretch">
       <input
+        class="text-black rounded-lg m-3 p-2"
+        type="text"
+        name="usernane"
+        placeholder="Username"
+        id="name-input"
+      />
+      <input
         class="text-black h-auto rounded-lg m-3 p-2"
         type="email"
         name="email"
@@ -46,9 +57,16 @@
       <input
         class="text-black rounded-lg m-3 p-2"
         type="password"
-        name="email"
+        name="pass"
         placeholder="Password"
         id="pass-input"
+      />
+      <input
+        class="text-black rounded-lg m-3 p-2"
+        type="password"
+        name="pass confirm"
+        placeholder="Confirm Password"
+        id="pass-input-confirm"
       />
 
       <button
