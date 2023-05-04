@@ -1,7 +1,13 @@
 <script>
   import { goto } from "$app/navigation";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-  import { getFirestore, doc, setDoc } from "firebase/firestore";
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDocs,
+    collection,
+  } from "firebase/firestore";
   import firebase from "../fb";
 
   const auth = getAuth();
@@ -12,6 +18,15 @@
     let password = document.getElementById("pass-input").value;
     let passConfirm = document.getElementById("pass-input-confirm").value;
     let name = document.getElementById("name-input").value;
+
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      console.log(name + "    " + doc.data().username);
+      if (name == doc.data().username) {
+        console.log("name in use");
+        return;
+      }
+    });
 
     if (password != passConfirm) {
       console.log("the passwords are different");
@@ -33,12 +48,12 @@
             password: password,
           });
 
-          console.log("wrote to dociment");
+          console.log("wrote to document");
+
+          goto("/");
         } catch (e) {
           console.error("Error adding document: ", e);
         }
-
-        goto("/");
       })
       .catch((error) => {
         const errorCode = error.code;
