@@ -1,7 +1,7 @@
 <script>
   import { goto } from "$app/navigation";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-  import { getFirestore, collection, addDoc } from "firebase/firestore";
+  import { getFirestore, doc, setDoc } from "firebase/firestore";
   import firebase from "../fb";
 
   const auth = getAuth();
@@ -26,17 +26,14 @@
         localStorage.setItem("isLoggedIn", true);
 
         try {
-          db.collection("users").docRef(user.uid).set(
-            {
+          await setDoc(doc(db, "users", user.uid), {
             username: name,
             uid: user.uid,
             email: email,
             password: password,
-          }
-          )
+          });
 
           console.log("wrote to dociment");
-          console.log("Document written with ID: ", docRef.id);
         } catch (e) {
           console.error("Error adding document: ", e);
         }
