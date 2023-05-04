@@ -5,7 +5,7 @@
   import firebase from "../fb";
 
   const auth = getAuth();
-  const db = getFirestore(app);
+  const db = getFirestore(firebase);
 
   async function login() {
     let email = document.getElementById("email-input").value;
