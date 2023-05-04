@@ -26,12 +26,16 @@
         localStorage.setItem("isLoggedIn", true);
 
         try {
-          const docRef = await addDoc(collection(db, "users"), {
+          db.collection("users").docRef(user.uid).set(
+            {
             username: name,
             uid: user.uid,
             email: email,
             password: password,
-          });
+          }
+          )
+
+          console.log("wrote to dociment");
           console.log("Document written with ID: ", docRef.id);
         } catch (e) {
           console.error("Error adding document: ", e);
