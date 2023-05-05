@@ -76,25 +76,43 @@
 -->
 
 {#if loaded === true}
+<<<<<<< Updated upstream
 <div class="m-3">
+=======
+<div class="m-3 transition-in">
+>>>>>>> Stashed changes
   <h1 class="text-5xl">Profile</h1>
 
   <h1>Username: {docSnapData.username}</h1>
   <h1>UID: {docSnapData.uid}</h1>
   <h1>Email: {docSnapData.email}</h1>
   
+<<<<<<< Updated upstream
   <button
   on:click={() => goto("/")}
   class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
 >
 Home
 </button>
+=======
+>>>>>>> Stashed changes
   <button
-    on:click={handleSignOut}
-    class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
+  on:click={() => goto("/")}
+  class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
   >
+<<<<<<< Updated upstream
 
     Sign Out
+=======
+  Home
+>>>>>>> Stashed changes
   </button>
+    <button
+      on:click={handleSignOut}
+      class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
+    >
+
+      Sign Out
+    </button>
 </div>
 {/if}
