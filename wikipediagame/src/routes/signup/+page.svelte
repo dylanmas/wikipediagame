@@ -1,25 +1,59 @@
 <script>
   import { goto } from "$app/navigation";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDocs,
+    collection,
+  } from "firebase/firestore";
   import firebase from "../fb";
 
   const auth = getAuth();
+  const db = getFirestore(firebase);
 
   async function login() {
     let email = document.getElementById("email-input").value;
     let password = document.getElementById("pass-input").value;
-    // let email = "a@b.com";
-    // let password = "123456";
+    let passConfirm = document.getElementById("pass-input-confirm").value;
+    let name = document.getElementById("name-input").value;
 
-    console.log(email);
-    console.log(password);
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      console.log(name + "    " + doc.data().username);
+      if (name == doc.data().username) {
+        console.log("name in use");
+        return;
+      }
+    });
+
+    if (password != passConfirm) {
+      console.log("the passwords are different");
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
         localStorage.setItem("uid", user.uid);
         localStorage.setItem("isLoggedIn", true);
-        goto("/");
+
+        try {
+          await setDoc(doc(db, "users", user.uid), {
+            username: name,
+            uid: user.uid,
+            email: email,
+            password: password,
+          });
+
+          console.log("wrote to document");
+
+          goto("/");
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -37,6 +71,13 @@
     <h1 class="m-3 text-4xl">Sign Up</h1>
     <div class="flex flex-col w-1/3 flex-stretch">
       <input
+        class="text-black rounded-lg m-3 p-2"
+        type="text"
+        name="usernane"
+        placeholder="Username"
+        id="name-input"
+      />
+      <input
         class="text-black h-auto rounded-lg m-3 p-2"
         type="email"
         name="email"
@@ -46,9 +87,16 @@
       <input
         class="text-black rounded-lg m-3 p-2"
         type="password"
-        name="email"
+        name="pass"
         placeholder="Password"
         id="pass-input"
+      />
+      <input
+        class="text-black rounded-lg m-3 p-2"
+        type="password"
+        name="pass confirm"
+        placeholder="Confirm Password"
+        id="pass-input-confirm"
       />
 
       <button
