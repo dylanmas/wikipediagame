@@ -7,11 +7,12 @@
 
   const auth = getAuth();
   const db = getFirestore(firebase);
-  let curDocument;
+  let curDocument = {};
+  let loading = true;
 
   onMount(async () => {
-    curDocument = await getTheDocument();
-    console.log(curDocument);
+    curDocument = (await getTheDocument());
+    console.log(curDocument.data().username);
   });
   function handleSignOut() {
     signOut(auth)
@@ -34,17 +35,29 @@
   }
 </script>
 
+{#await curDocument}
+
+{:then data}
 <div class="m-3">
   <h1 class="text-5xl">Profile</h1>
 
-  <p>{curDocument.username}</p>
-  <p>{curDocument.email}</p>
-  <p>{curDocument.uid}</p>
-
+  <p>{data.data().username}</p>
+  <p>{data.data().email}</p>
+  <p>{data.data().uid}</p>
+  <button
+  on:click={() => goto("/")}
+  class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
+>
+Home
+</button>
   <button
     on:click={handleSignOut}
     class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
   >
+
     Sign Out
   </button>
 </div>
+{:catch error}
+<p>The error was {error.message}</p>
+{/await}
