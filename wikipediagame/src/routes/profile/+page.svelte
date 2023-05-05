@@ -2,10 +2,13 @@
   import firebase from "../fb";
   import { getAuth, signOut } from "firebase/auth";
   import { goto } from "$app/navigation";
+  import { getFirestore, getDoc } from "firebase/firestore";
+
+  const auth = getAuth();
+  const db = getFirestore(firebase);
+  console.log(auth);
 
   function handleSignOut() {
-    const auth = getAuth();
-
     signOut(auth)
       .then(() => {
         // Sign-out successful.
