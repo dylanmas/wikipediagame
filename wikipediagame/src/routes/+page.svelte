@@ -114,7 +114,7 @@ class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transit
 >
   <div class="flex">
     <h1
-      class="font-bold text-[100px] z-0 -rotate-[15deg] -translate-y-4 -translate-x-4 text-black"
+      class="font-bold text-[200px] z-0 -rotate-[10deg] -translate-y-10 -translate-x-4"
     >
       Wikiroyale
     </h1>
