@@ -151,18 +151,18 @@ class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transit
         </div>
       </div>
 
-      <div class="bg-black rounded-lg shadow-lg p-4 w-full flex flex-col gap-2">
+      <div class="bg-black backdrop-blur-md bg-opacity-70 rounded-lg shadow-lg p-4 w-full flex flex-col gap-2">
         <h1 class="font-bold text-3xl">Articles of the day:</h1>
         <div class="w-full flex">
           <div class="flex flex-col gap-2 w-full">
             <div class="flex">
               <button
-                class="rounded-l-lg h-48 w-full shadow-md bg-red-500 overflow-clip text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:"
+                class="rounded-l-lg h-48 w-full shadow-md bg-red-500 overflow-clip text-white transition-all duration-250 border-4 hover:bg-red-900 hover:shadow-blue-500 active:scale-95 hover:accent-blue-500 hover:shadow-xl hover:border-blue-500 hover:"
               >
                 <img class="w-full" src="https://picsum.photos/500/500" />
               </button>
               <button
-                class="rounded-r-lg shadow-md p-2 bg-neutral-800 overflow-clip text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:"
+                class="rounded-r-lg shadow-md p-2 bg-black overflow-clip text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
