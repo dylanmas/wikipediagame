@@ -2,7 +2,7 @@
   import firebase from "../fb";
   import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
   import { goto } from "$app/navigation";
-  import { getFirestore, getDoc, doc } from "firebase/firestore";
+  import { getFirestore, getDoc, doc, getDocs } from "firebase/firestore";
   import { onMount } from "svelte";
 
   const auth = getAuth();
@@ -35,7 +35,6 @@
   }
 
   async function getTheDocument() {
-
     onAuthStateChanged(firebaseAuth, async (user) => {
       if (user) {
         // userText = "User Logged In: " + user.email;
@@ -57,62 +56,70 @@
         return null;
       }
     });
+  }
 
-    /*
-    const docRef = doc(db, "users", auth.currentUser.uid);
-    const docSnap = await getDoc(docRef);
-    return docSnap;*/
+  async function changeUsername() {
+    let password = document.getElementById("pass-input").value;
+    let newUsername = document.getElementById("new-user-input").value;
+
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+      console.log(newUsername + "    " + doc.data().username);
+      if (newUsername == doc.data().username) {
+        console.log("name in use");
+        return;
+      }
+    });
+
+    if (password != passConfirm) {
+      console.log("the passwords are different");
+      return;
+    }
   }
 </script>
 
-<!--
-{#await curDocument}
-
-{:then data}
-
-{:catch error}
-<p>The error was {error.message}</p>
-{/await}
--->
-
 {#if loaded === true}
-<<<<<<< Updated upstream
-<div class="m-3">
-=======
-<div class="m-3 transition-in">
->>>>>>> Stashed changes
-  <h1 class="text-5xl">Profile</h1>
+  <div class="m-3">
+    <h1 class="text-5xl">Profile</h1>
 
-  <h1>Username: {docSnapData.username}</h1>
-  <h1>UID: {docSnapData.uid}</h1>
-  <h1>Email: {docSnapData.email}</h1>
-  
-<<<<<<< Updated upstream
-  <button
-  on:click={() => goto("/")}
-  class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
->
-Home
-</button>
-=======
->>>>>>> Stashed changes
-  <button
-  on:click={() => goto("/")}
-  class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
-  >
-<<<<<<< Updated upstream
+    <h1>Username: {docSnapData.username}</h1>
+    <h1>UID: {docSnapData.uid}</h1>
+    <h1>Email: {docSnapData.email}</h1>
 
-    Sign Out
-=======
-  Home
->>>>>>> Stashed changes
-  </button>
+    <button
+      on:click={() => goto("/")}
+      class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
+    >
+      Home
+    </button>
     <button
       on:click={handleSignOut}
       class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
     >
-
       Sign Out
     </button>
-</div>
+    <br />
+    <h1 class="text-3xl mt-12">Change Username</h1>
+
+    <input
+      class="text-black h-auto rounded-lg m-3 ml-0 p-2"
+      type="email"
+      name="email"
+      id="new-user-input"
+      placeholder="New Username"
+    />
+    <input
+      class="text-black rounded-lg m-3 p-2"
+      type="password"
+      name="email"
+      placeholder="Password"
+      id="pass-input"
+    />
+
+    <button
+      on:click={changeUsername}
+      class="m-3 text-lg bg-white text-black w-1/6 rounded-lg text-center p-2"
+      >Submit</button
+    >
+  </div>
 {/if}
