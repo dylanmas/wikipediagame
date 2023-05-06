@@ -2,7 +2,14 @@
   import firebase from "../fb";
   import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
   import { goto } from "$app/navigation";
-  import { getFirestore, getDoc, doc, getDocs } from "firebase/firestore";
+  import {
+    getFirestore,
+    getDoc,
+    doc,
+    getDocs,
+    updateDoc,
+    collection,
+  } from "firebase/firestore";
   import { onMount } from "svelte";
 
   const auth = getAuth();
@@ -59,7 +66,7 @@
   }
 
   async function changeUsername() {
-    let password = document.getElementById("pass-input").value;
+    let userConfirm = document.getElementById("user-confirm-input").value;
     let newUsername = document.getElementById("new-user-input").value;
 
     const querySnapshot = await getDocs(collection(db, "users"));
@@ -71,10 +78,18 @@
       }
     });
 
-    if (password != passConfirm) {
+    if (newUsername != userConfirm) {
       console.log("the passwords are different");
       return;
     }
+
+    const curDoc = doc(db, "users", auth.currentUser.uid);
+
+    await updateDoc(curDoc, {
+      username: newUsername,
+    });
+
+    getTheDocument();
   }
 </script>
 
@@ -103,17 +118,17 @@
 
     <input
       class="text-black h-auto rounded-lg m-3 ml-0 p-2"
-      type="email"
+      type="text"
       name="email"
       id="new-user-input"
       placeholder="New Username"
     />
     <input
       class="text-black rounded-lg m-3 p-2"
-      type="password"
+      type="text"
       name="email"
-      placeholder="Password"
-      id="pass-input"
+      placeholder="Confirm Username"
+      id="user-confirm-input"
     />
 
     <button
