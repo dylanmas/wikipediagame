@@ -40,17 +40,17 @@
   async function makeUserText() {
     onAuthStateChanged(firebaseAuth, async (user) => {
       if (user) {
-        userText = "User Logged In: " + user.email;
+        userText = user.email;
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
           console.log("Document data:", docSnap.data());
-          userText = "User Logged In: " + docSnap.data().username;
+          userText = docSnap.data().username;
         } else {
           // docSnap.data() will be undefined in this case
           console.log("No such document!");
-          userText = "User Logged In: " + user.email;
+          userText = user.email;
         }
       } else {
         userText = "Click to Log In";
@@ -125,7 +125,11 @@
       </div>
     </div>
     <div class="bg-black h-48 w-48 rounded-lg shadow-lg p-4 ml-4">
-      <button on:click={goToSignUp} class="transition-all bg-neutral-700 rounded-lg shadow-md p-4 duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500">{userText} </button>
+      <button
+        on:click={goToSignUp}
+        class="transition-all bg-neutral-700 rounded-lg shadow-md p-4 duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 h-full"
+        >{userText}
+      </button>
     </div>
   </div>
 
