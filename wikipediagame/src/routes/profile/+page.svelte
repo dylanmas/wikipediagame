@@ -90,7 +90,7 @@
       username: newUsername,
     });
     
-showChangeUsername = false
+    showChangeUsername = false
     getTheDocument();
   }
 </script>
