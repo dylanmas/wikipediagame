@@ -186,13 +186,6 @@ class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transit
         </div>
       </div>
     </div>
-    <div class="bg-black h-48 w-48 rounded-lg shadow-lg p-4 ml-4">
-      <button
-        on:click={goToSignUp}
-        class="transition-all bg-neutral-700 rounded-lg shadow-md p-4 duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 h-full"
-        >{userText}
-      </button>
-    </div>
   </div>
 
   <div
