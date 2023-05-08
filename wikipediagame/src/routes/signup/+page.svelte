@@ -39,8 +39,6 @@
       .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
-        localStorage.setItem("uid", user.uid);
-        localStorage.setItem("isLoggedIn", true);
 
         try {
           await setDoc(doc(db, "users", user.uid), {
@@ -48,6 +46,7 @@
             uid: user.uid,
             email: email,
             password: password,
+            userImage: "https://picsum.photos/600/600",
           });
 
           console.log("wrote to document");
