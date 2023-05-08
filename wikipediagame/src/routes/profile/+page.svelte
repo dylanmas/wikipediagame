@@ -90,36 +90,11 @@
       username: newUsername,
     });
 
+    showChangeUsername = false;
+
     getTheDocument();
   }
 </script>
-
-<!--
-{#if loaded === true}
-  <div class="m-3">
-    <h1 class="text-5xl">Profile</h1>
-
-    <h1>Username: {docSnapData.username}</h1>
-    <h1>UID: {docSnapData.uid}</h1>
-    <h1>Email: {docSnapData.email}</h1>
-
-    <button
-      on:click={() => goto("/")}
-      class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
-    >
-      Home
-    </button>
-    <button
-      on:click={handleSignOut}
-      class="mt-3 text-lg bg-white text-black w-1/8 rounded-lg text-center p-2"
-    >
-      Sign Out
-    </button>
-    <br />
-    
-  </div>
-{/if}
--->
 
 {#if loaded === true}
 <img class="absolute w-full h-[100vh] brightness-50 " src="https://picsum.photos/600/600" />
@@ -155,7 +130,7 @@
       </div>
 
 
-      <div class="{showChangeUsername != true ? "hidden" : ""} absolute top-0 left-0 w-full h-[100vh] flex flex-col backdrop-blur-3xl backdrop-opacity-50">
+      <div class="{showChangeUsername != true ? "scale-0 opacity-0" : ""} transition-all absolute top-0 left-0 w-full h-[100vh] flex flex-col backdrop-blur-3xl backdrop-opacity-50">
         <div class="mx-auto my-auto bg-white rounded-lg shadow-lg text-black p-4">
           <h1 class="text-3xl font-bold">Change Username</h1>
 
@@ -179,12 +154,12 @@
           <div class="flex gap-2">
             <button
               on:click={changeUsername}
-              class="mt-3 text-lg text-black w-1/8 rounded-lg text-center transition-all bg-neutral-300 rounded-lg shadow-md p-4 duration-250 hover:bg-neutral-400 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500"
+              class="mt-3 text-lg text-white rounded-lg text-center transition-all bg-neutral-700 rounded-lg shadow-md p-4 duration-250 hover:bg-neutral-400 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500"
               >Submit</button
             >
             <button
               on:click={() => {showChangeUsername = false;}}
-              class="mt-3 text-lg text-black w-1/8 rounded-lg text-center transition-all bg-neutral-300 rounded-lg shadow-md p-4 duration-250 hover:bg-neutral-400 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500"
+              class="mt-3 text-lg text-white rounded-lg text-center transition-all bg-neutral-700 rounded-lg shadow-md p-4 duration-250 hover:bg-neutral-400 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500"
               >Cancel</button
             >
           </div>
