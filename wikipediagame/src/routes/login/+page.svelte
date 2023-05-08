@@ -46,6 +46,7 @@
               name="email"
               id="email-input"
               placeholder="Email Address"
+              value="aabaac@g.com"
             />
             <input
               class="text-black h-auto rounded-lg p-2 bg-neutral-300 shadow-md w-full mt-2"
@@ -53,6 +54,7 @@
               name="email"
               placeholder="Password"
               id="pass-input"
+              value="123456"
             />
           </div>
         </div>
