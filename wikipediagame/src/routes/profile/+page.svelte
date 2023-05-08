@@ -105,7 +105,10 @@
       <img  class="w-20 h-20 rounded-full" src="https://picsum.photos/600/600" />
       <h1 class="text-6xl font-bold mb-2">{docSnapData.username}</h1>
 
-      <h1>UID: {docSnapData.uid}</h1>
+      <div class="flex flex-row">
+        <h1 class="mr-1">UID:</h1> 
+        <h1 class="blur-sm hover:blur-0 transition-all">{docSnapData.uid}</h1>
+      </div>
       <h1>Email: {docSnapData.email}</h1>
 
       <div class="flex gap-2">

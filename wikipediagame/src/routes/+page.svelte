@@ -79,21 +79,6 @@
   antialias
   background={new THREE.Color("rgb(255, 255, 255)")}
 >
-  <!--
-  <SC.Group position={[-20, 0, 0]} rotation={[spin, spin, spin]}>
-    {#each Array(40) as arr, i}
-      {#each Array(40) as arr2, j}
-        <SC.Mesh
-          geometry={new THREE.BoxGeometry()}
-          material={new THREE.MeshStandardMaterial({ color: 0x505050 })}
-          position={[i * 3 - 20, Math.pow(i, 2) * -0.1, j * 3 - 20]}
-          rotation={[Math.random(), Math.random(), Math.random()]}
-        />
-      {/each}
-    {/each}
-  </SC.Group>
-  -->
-  
   <SC.Primitive
     object={model.scene}
     scale={[10,10,10]}
