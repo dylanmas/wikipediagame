@@ -2,6 +2,7 @@
   import firebase from "../fb";
   import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
   import { goto } from "$app/navigation";
+  import {Button} from "../../components/button.svelte"
   import {
     getFirestore,
     getDoc,
@@ -165,6 +166,12 @@
               class="mt-3 text-lg text-black w-1/8 rounded-lg text-center transition-all bg-neutral-300 rounded-lg shadow-md p-4 duration-250 hover:bg-neutral-400 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500"
               >Cancel</button
             >
+
+            <Button
+            title="title"
+            classes="mt-3 text-lg text-black w-1/8 rounded-lg text-center transition-all bg-neutral-300 rounded-lg shadow-md p-4 duration-250 hover:bg-neutral-400 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500"
+            callback={()=>goto("/")}
+            />
           </div>
 
         </div>
