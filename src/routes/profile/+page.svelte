@@ -2,7 +2,7 @@
   import firebase from "../fb";
   import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
   import { goto } from "$app/navigation";
-  import {Button} from "../../components/button.svelte"
+  import Button from "../components/button.svelte"
   import {
     getFirestore,
     getDoc,

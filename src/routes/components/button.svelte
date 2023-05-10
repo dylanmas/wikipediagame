@@ -1,6 +1,4 @@
 <script>
-    import {goto} from "$app/navigation"
-
     export var title = "";
     export var classes;
     export var callback;
@@ -12,3 +10,5 @@
     >
     {title}
 </button>
+
+
