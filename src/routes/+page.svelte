@@ -17,6 +17,7 @@
   var docSnapData = "";
   var numWins = 0;
   var numPlays = 0;
+  var userLevel = 1;
 
   SC.onFrame(() => {
     if (vel) {
@@ -96,7 +97,8 @@
         loaded = true;
 
         numWins = docSnap.data().wins;
-        numPlays = docSnap.data.plays;
+        numPlays = docSnap.data().plays;
+        userLevel = docSnap.data().level;
         return docSnap.data();
       } else {
         console.log("You aren't logged in.");
@@ -163,7 +165,7 @@ class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transit
         </div>
 
         <div class="flex flex-col items-center font-bold text-2xl gap-2 w-full">
-            Level 1
+            Level {userLevel}
             <div class="w-full h-1 bg-blue-500 rounded-full" />
         </div>
       </div>
