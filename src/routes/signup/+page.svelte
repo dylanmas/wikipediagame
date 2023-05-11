@@ -47,6 +47,9 @@
             email: email,
             password: password,
             userImage: "https://picsum.photos/600/600",
+            wins: 0,
+            plays: 0,
+            level: 1,
           });
 
           console.log("wrote to document");

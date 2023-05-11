@@ -28,7 +28,36 @@
     curDocument = await getTheDocument();
     // console.log(await curDocument.data().username);
     console.log(await curDocument);
+
+    if(docSnapData.level == null)
+    {
+      const curDoc = doc(db, "users", auth.currentUser.uid);
+    await updateDoc(curDoc, {
+      level: 1,
+    });
+    }
+
+    if(docSnapData.plays == null)
+    {
+      const curDoc = doc(db, "users", auth.currentUser.uid);
+    await updateDoc(curDoc, {
+      plays: 0,
+    });
+    }
+
+    if(docSnapData.wins == null)
+    {
+      const curDoc = doc(db, "users", auth.currentUser.uid);
+    await updateDoc(curDoc, {
+      wins: 0,
+    });
+    }
+
+    curDocument = await getTheDocument();
+    // console.log(await curDocument.data().username);
+    console.log(await curDocument);
   });
+
   function handleSignOut() {
     signOut(auth)
       .then(() => {
@@ -110,6 +139,10 @@
         <h1 class="mr-1">UID:</h1> 
         <h1 class="blur-sm hover:blur-0 transition-all">{docSnapData.uid}</h1>
       </div>
+
+        <h1 class="mr-1">Plays: {docSnapData.plays}</h1> 
+        <h1 class="mr-1">Wins: {docSnapData.wins}</h1> 
+        <h1 class="mr-1">Level: {docSnapData.level}</h1> 
       <h1>Email: {docSnapData.email}</h1>
 
       <div class="flex gap-2">
