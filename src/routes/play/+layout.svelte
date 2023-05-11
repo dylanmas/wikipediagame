@@ -1,9 +1,14 @@
 <script>
   import * as THREE from "three";
   import * as SC from "svelte-cubed";
+  import wtf from 'wtf_wikipedia';
+  import { onMount } from 'svelte';
 
   let spin = 2;
   let vel = true;
+
+  var sectionsInfo = "";
+  var title = "";
 
   SC.onFrame(() => {
     if (vel) {
@@ -16,6 +21,66 @@
       vel = !vel;
     }
   });
+
+  var tmp = "";
+  
+  var sections = [];
+
+  const goToArticle = async (articleName) => {
+    sections = "";
+    sections = [];
+
+    let doctmp = await wtf.fetch(articleName);
+    let doc = doctmp.json({categories: false});
+    tmp = doc.sections;
+
+    console.log(tmp);
+
+    let totalIndex = 0;
+
+    for (let index1 = 0; index1 < tmp.length; index1++) {
+      let tmp2 = tmp[index1].paragraphs.sentences;
+      for (let index2 = 0; index2 < tmp2.length; index2++) {
+        console.log(tmp2[index2].paragraphs);
+        for (let index3 = 0; index3 < array.length; index3++) {
+                    
+        }        
+      }      
+    }
+    
+    /*
+    tmp.forEach(element => {
+        let element2 = element.paragraphs
+        for (let index = 0; index < element2.length; index++) {
+            element2[index].sentences;
+            let element3 = element2[index].sentences;
+            for (let index2 = 0; index2 < element3.length; index2++) {
+              sections[totalIndex] = element3[index2].text;
+              console.log(element3[index2].text);
+              totalIndex++;
+            }
+        }
+    });*/
+  }
+  
+  onMount(async () => {
+    let query = "";
+
+    fetch('https://en.wikipedia.org/w/api.php?action=query&format=json&list=random&rnnamespace=0&rnlimit=1&origin=*', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(async (res) => {
+      let foo = res.json();
+      let tst = await foo;
+
+      query = await tst.query.random[0].title
+
+      goToArticle(query);
+    })
+  })
 </script>
 
 <SC.Canvas
@@ -53,7 +118,7 @@
     </div>
 </div>
 
-<div class="flex gap-4">
+<div class="flex gap-4 overflow-clip">
     <div class="flex flex-col gap-4">
         <div
           class="bg-black backdrop-blur-md bg-opacity-70 rounded-lg shadow-lg p-4 w-[300px] flex flex-col items-center gap-4"
@@ -76,9 +141,11 @@
       <div
         class="bg-white w-full backdrop-blur-md bg-opacity-70 text-black rounded-lg shadow-lg p-4 flex flex-col gap-2"
       >
-        <h1 class="font-bold text-3xl">Article name</h1>
-        <div class="flex items-center gap-4">
-          
+        <h1 class="font-bold text-3xl">{title}</h1>
+        <div class="flex flex-col items-center gap-4 overflow-y-scroll">
+          {#each sectionsInfo as sectionInfo}
+          <h1 class="">{sectionInfo}</h1>
+          {/each}
         </div>
       </div>
   </div>
