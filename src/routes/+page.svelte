@@ -14,6 +14,9 @@
   let firebaseAuth = getAuth();
   let userText = "";
   const db = getFirestore(firebase);
+  var docSnapData = "";
+  var numWins = 0;
+  var numPlays = 0;
 
   SC.onFrame(() => {
     if (vel) {
@@ -71,7 +74,36 @@
   onMount(async () => {
     await loadGLTF().then(_model => model = _model);
     console.log(model);
+
+    await getTheDocument();
   })
+
+  async function getTheDocument() {
+    onAuthStateChanged(firebaseAuth, async (user) => {
+      if (user) {
+        // userText = "User Logged In: " + user.email;
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+        } else {
+          // docSnap.data() will be undefined in this case
+          console.log("No such document!");
+        }
+
+        docSnapData = docSnap.data();
+        loaded = true;
+
+        numWins = docSnap.data().wins;
+        numPlays = docSnap.data.plays;
+        return docSnap.data();
+      } else {
+        console.log("You aren't logged in.");
+        return null;
+      }
+    });
+  }
 </script>
 
 {#if model}
@@ -114,7 +146,7 @@ class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transit
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
             </svg>
-            1000
+            {numWins}
           </h1>
   
           <h1 class="flex flex-col items-center">
@@ -122,7 +154,7 @@ class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transit
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" />
             </svg>
-            2000
+            {numPlays}
           </h1>
   
           <button on:click={goToSignUp} class="flex h-full ml-auto text-2xl items-center transition-all bg-black rounded-lg shadow-md p-2 duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 font-bold">
