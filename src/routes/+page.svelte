@@ -8,6 +8,7 @@
   import Gltf from "./GLTF.svelte";
   import { onMount } from "svelte";
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+  import "../firebase-constants"
 
   let spin = 2;
   let vel = true;
