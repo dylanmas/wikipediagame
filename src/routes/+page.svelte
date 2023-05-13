@@ -8,13 +8,11 @@
   import Gltf from "./GLTF.svelte";
   import { onMount } from "svelte";
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-  import "../firebase-constants"
+  import {firebaseAuth, db, curDoc} from "../firebase-constants"
 
   let spin = 2;
   let vel = true;
-  let firebaseAuth = getAuth();
   let userText = "";
-  const db = getFirestore(firebase);
   var docSnapData = "";
   var numWins = 0;
   var numPlays = 0;
@@ -49,10 +47,8 @@
     onAuthStateChanged(firebaseAuth, async (user) => {
       if (user) {
         userText = user.email;
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
+        if (curDoc != "") {
           console.log("Document data:", docSnap.data());
           userText = docSnap.data().username;
         } else {
@@ -74,6 +70,7 @@
   }
 
   onMount(async () => {
+
     await loadGLTF().then(_model => model = _model);
     console.log(model);
 
