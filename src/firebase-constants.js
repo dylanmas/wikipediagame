@@ -1,8 +1,24 @@
 import firebase from "./routes/fb"
 import {getAuth} from "firebase/auth"
-import {getFirestore} from "firebase/firestore"
+import {getFirestore, getDoc, doc} from "firebase/firestore"
 
-modules.exports = {
-    firebaseAuth: getAuth(firebase),
-    firebaseFirestore: getFirestore(firebase),
+export let firebaseAuth = getAuth(firebase);
+export let db = getFirestore(firebase);
+
+let ifDoc = "";
+
+if(firebaseAuth.currentUser)
+{
+    ifDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
 }
+
+export async function updateDoc()
+{
+    if (firebaseAuth.currentUser)
+    {
+        ifDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
+    }
+
+    curDoc = ifDoc;
+}
+export let curDoc = ifDoc;
