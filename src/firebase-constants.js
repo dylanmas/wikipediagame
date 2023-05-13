@@ -4,21 +4,35 @@ import {getFirestore, getDoc, doc} from "firebase/firestore"
 
 export let firebaseAuth = getAuth(firebase);
 export let db = getFirestore(firebase);
-
-let ifDoc = "";
+export let docLoaded = false;
 
 if(firebaseAuth.currentUser)
 {
-    ifDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
+    curDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
+    docLoaded = true;
+}
+else
+{
+    docLoaded = false;
 }
 
 export async function updateDoc()
 {
     if (firebaseAuth.currentUser)
     {
-        ifDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
+        curDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
+        docLoaded = true;
     }
-
-    curDoc = ifDoc;
+    else
+    {
+        docLoaded = false;
+    }
 }
-export let curDoc = ifDoc;
+
+export function removeCurDoc()
+{
+    curDoc = "";
+    docLoaded = false;
+}
+
+export let curDoc = "";
