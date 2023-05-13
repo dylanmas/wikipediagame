@@ -11,22 +11,20 @@
     updateDoc,
     collection,
   } from "firebase/firestore";
-  import * as fbConst from ".../firebase-constants";
+  import * as fbConst from "../../firebase-constants";
   import { onMount } from "svelte";
 
   const auth = fbConst.firebaseAuth;
   const db = fbConst.db;
   let curDocument = fbConst.curDoc;
 
+  let docSnapData = curDocument.data();
+
   let loaded = false;
 
   var showChangeUsername = false;
 
-  onMount(async () => {
-    curDocument = await getTheDocument();
-    // console.log(await curDocument.data().username);
-    console.log(await curDocument);
-  });
+  onMount(async () => {});
 
   function handleSignOut() {
     signOut(auth)
@@ -34,6 +32,7 @@
         // Sign-out successful.
         localStorage.setItem("uid", null);
         localStorage.setItem("isLoggedIn", false);
+        fbConst.removeCurDoc();
         goto("/");
       })
       .catch((error) => {
