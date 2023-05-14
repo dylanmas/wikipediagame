@@ -27,6 +27,8 @@
   var sections = [];
 
   const goToArticle = async (articleName) => {
+    title = articleName;
+    
     sections = "";
     sections = [];
 
@@ -39,28 +41,37 @@
     let totalIndex = 0;
 
     for (let index1 = 0; index1 < tmp.length; index1++) {
-      let tmp2 = tmp[index1].paragraphs.sentences;
-      for (let index2 = 0; index2 < tmp2.length; index2++) {
-        console.log(tmp2[index2].paragraphs);
-        for (let index3 = 0; index3 < array.length; index3++) {
-                    
-        }        
-      }      
-    }
-    
-    /*
-    tmp.forEach(element => {
-        let element2 = element.paragraphs
-        for (let index = 0; index < element2.length; index++) {
-            element2[index].sentences;
-            let element3 = element2[index].sentences;
-            for (let index2 = 0; index2 < element3.length; index2++) {
-              sections[totalIndex] = element3[index2].text;
-              console.log(element3[index2].text);
-              totalIndex++;
-            }
+      let tmp2 = tmp[index1].paragraphs;
+
+      if (tmp2 !== undefined) {
+        for (let index2 = 0; index2 < tmp2.length; index2++) {
+          let tmp3 = tmp2[index2].sentences;
+          let foo = "";
+
+          if (tmp3 !== undefined) {
+            for (let index3 = 0; index3 < tmp3.length; index3++) {
+              let tmp4 = tmp3[index3].text;
+
+              if (tmp4 !== undefined) {
+                console.log(tmp4);
+                foo += tmp4 + " ";
+              }
+              
+            }        
+            sections[totalIndex] = foo;
+            totalIndex++;
+          }
         }
-    });*/
+      }
+    }
+
+    console.log(sections);
+  }
+
+  var link = "";
+
+  var goToArticle2 = (query) => {
+
   }
   
   onMount(async () => {
@@ -78,9 +89,11 @@
 
       query = await tst.query.random[0].title
 
-      goToArticle(query);
+      // goToArticle(query);
+      goToArticle2(query);
     })
   })
+
 </script>
 
 <SC.Canvas
@@ -118,7 +131,7 @@
     </div>
 </div>
 
-<div class="flex gap-4 overflow-clip">
+<div class="h-full flex gap-4 overflow-clip">
     <div class="flex flex-col gap-4">
         <div
           class="bg-black backdrop-blur-md bg-opacity-70 rounded-lg shadow-lg p-4 w-[300px] flex flex-col items-center gap-4"
@@ -138,15 +151,16 @@
         </div>
     </div>
 
-      <div
-        class="bg-white w-full backdrop-blur-md bg-opacity-70 text-black rounded-lg shadow-lg p-4 flex flex-col gap-2"
-      >
-        <h1 class="font-bold text-3xl">{title}</h1>
-        <div class="flex flex-col items-center gap-4 overflow-y-scroll">
-          {#each sectionsInfo as sectionInfo}
-          <h1 class="">{sectionInfo}</h1>
-          {/each}
-        </div>
+    <div
+      class="bg-white w-full h-full backdrop-blur-md bg-opacity-70 text-black rounded-lg shadow-lg flex flex-col gap-2 p-4"
+    >
+      <h1 class="font-bold text-3xl">{title}</h1>
+      <div class="flex flex-col items-center gap-2 h-full">
+        <!-- {#each sections as sectionInfo} 
+        <h1 class="text-left mr-auto">{sectionInfo}</h1>
+        {/each} -->
+        <iframe bind:src={link} id="iframeInner" class="w-full h-full rounded-lg shadow-lg font-bold backdrop-opacity-100" />
       </div>
+    </div>
   </div>
 </div>
