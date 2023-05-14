@@ -7,7 +7,11 @@ export let db = getFirestore(firebase);
 export let docLoaded = false;
 
 if (firebaseAuth.currentUser) {
-  curDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid)).data();
+  let tempDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
+
+  if (tempDoc.exists()) {
+    curDoc = tempDoc.data();
+  }
   // updateDoc();
   docLoaded = true;
 } else {
@@ -47,9 +51,11 @@ export async function updateDoc() {
 
 export async function getTheDoc() {
   if (firebaseAuth.currentUser) {
-    curDoc = await getDoc(
-      doc(db, "users", firebaseAuth.currentUser.uid)
-    ).data();
+    let tempDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
+
+    if (tempDoc.exists()) {
+      curDoc = tempDoc.data();
+    }
 
     console.log("got the data");
   }

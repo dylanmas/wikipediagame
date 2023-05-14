@@ -46,8 +46,8 @@
       userText = user.email;
 
       if (curDoc != "") {
-        console.log("Document data:", docSnap.data());
-        userText = docSnap.data().username;
+        console.log("Document data:", curDoc);
+        userText = curDoc.username;
       } else {
         // docSnap.data() will be undefined in this case
         console.log("No such document!");
@@ -99,7 +99,7 @@
   // }
 
   console.log("curDOc " + curDoc);
-  console.log(curDoc.data);
+  console.log(curDoc);
 </script>
 
 {#if model}
