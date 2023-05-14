@@ -50,4 +50,4 @@ export function removeCurDoc() {
   docLoaded = false;
 }
 
-export let curDoc = "";
+export let curDoc = "sdfsdf";

@@ -29,7 +29,8 @@
   var showChangeUsername = false;
 
   onMount(async () => {
-    console.log("on mount")
+    console.log("on mount");
+    loaded = true;
   });
 
   function handleSignOut() {
