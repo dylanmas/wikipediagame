@@ -32,34 +32,30 @@
   makeUserText();
 
   function goToSignUp() {
-    onAuthStateChanged(firebaseAuth, (user) => {
-      if (user) {
-        goto("/profile");
-        console.log("User is signed in");
-      } else {
-        goto("/login");
-        console.log("User is signed out");
-      }
-    });
+    if (firebaseAuth.currentUser) {
+      goto("/profile");
+      console.log("User is signed in");
+    } else {
+      goto("/login");
+      console.log("User is signed out");
+    }
   }
 
   async function makeUserText() {
-    onAuthStateChanged(firebaseAuth, async (user) => {
-      if (user) {
-        userText = user.email;
+    if (firebaseAuth.currentUser) {
+      userText = user.email;
 
-        if (curDoc != "") {
-          console.log("Document data:", docSnap.data());
-          userText = docSnap.data().username;
-        } else {
-          // docSnap.data() will be undefined in this case
-          console.log("No such document!");
-          userText = user.email;
-        }
+      if (curDoc != "") {
+        console.log("Document data:", docSnap.data());
+        userText = docSnap.data().username;
       } else {
-        userText = "Log in/Sign up";
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+        userText = user.email;
       }
-    });
+    } else {
+      userText = "Log in/Sign up";
+    }
   }
 
   let model = null;
@@ -103,6 +99,7 @@
   // }
 
   console.log("curDOc " + curDoc);
+  console.log(curDoc.data);
 </script>
 
 {#if model}
@@ -134,7 +131,7 @@
         >
           <div class="flex items-center w-full gap-4">
             <button
-              on:click={goToSignUp}
+              on:click={() => goToSignUp()}
               class="flex text-2xl items-center transition-all bg-black rounded-lg shadow-md p-2 duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 font-bold"
             >
               <img

@@ -11,8 +11,6 @@
     let email = document.getElementById("email-input").value;
     let password = document.getElementById("pass-input").value;
 
-    console.log(email);
-    console.log(password);
     signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         // Signed in
