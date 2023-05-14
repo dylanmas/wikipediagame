@@ -8,6 +8,7 @@ export let docLoaded = false;
 
 if (firebaseAuth.currentUser) {
   curDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
+  updateDoc();
   docLoaded = true;
 } else {
   docLoaded = false;
@@ -15,8 +16,29 @@ if (firebaseAuth.currentUser) {
 
 export async function updateDoc() {
   if (firebaseAuth.currentUser) {
+    let docData = curDoc.data();
+
+    if (docData.level == null) {
+      const updateDocVals = doc(db, "users", firebaseAuth.currentUser.uid);
+      await updateDoc(updateDocVals, {
+        level: 1,
+      });
+    }
+    if (docData.plays == null) {
+      const updateDocVals = doc(db, "users", firebaseAuth.currentUser.uid);
+      await updateDoc(updateDocVals, {
+        plays: 0,
+      });
+    }
+
+    if (docData.wins == null) {
+      const updateDocVals = doc(db, "users", firebaseAuth.currentUser.uid);
+      await updateDoc(updateDocVals, {
+        wins: 0,
+      });
+    }
+
     curDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
-    docLoaded = true;
   } else {
     docLoaded = false;
     console.log(docLoaded);

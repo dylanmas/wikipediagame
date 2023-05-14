@@ -18,13 +18,19 @@
   const db = fbConst.db;
   let curDocument = fbConst.curDoc;
 
-  let docSnapData = curDocument.data();
+  let docSnapData = "";
+
+  if (fbConst.docLoaded) {
+    docSnapData = curDocument.data();
+  }
 
   let loaded = false;
 
   var showChangeUsername = false;
 
-  onMount(async () => {});
+  onMount(async () => {
+    console.log("on mount")
+  });
 
   function handleSignOut() {
     signOut(auth)
@@ -66,7 +72,6 @@
     });
 
     showChangeUsername = false;
-    getTheDocument();
   }
 </script>
 
