@@ -66,7 +66,7 @@
       return;
     }
 
-    const curDoc = doc(db, "users", auth.currentUser.uid);
+    const curDoc = doc(db, "users", fbConst.firebaseAuth.currentUser.uid);
 
     await updateDoc(curDoc, {
       username: newUsername,
@@ -93,17 +93,19 @@
           class="w-20 h-20 rounded-full"
           src="https://picsum.photos/600/600"
         />
-        <h1 class="text-6xl font-bold mb-2">{docSnapData.username}</h1>
+        <h1 class="text-6xl font-bold mb-2">{fbConst.curDoc.username}</h1>
 
         <div class="flex flex-row">
           <h1 class="mr-1">UID:</h1>
-          <h1 class="blur-sm hover:blur-0 transition-all">{docSnapData.uid}</h1>
+          <h1 class="blur-sm hover:blur-0 transition-all">
+            {fbConst.curDoc.uid}
+          </h1>
         </div>
 
-        <h1 class="mr-1">Plays: {docSnapData.plays}</h1>
-        <h1 class="mr-1">Wins: {docSnapData.wins}</h1>
-        <h1 class="mr-1">Level: {docSnapData.level}</h1>
-        <h1>Email: {docSnapData.email}</h1>
+        <h1 class="mr-1">Plays: {fbConst.curDoc.plays}</h1>
+        <h1 class="mr-1">Wins: {fbConst.curDoc.wins}</h1>
+        <h1 class="mr-1">Level: {fbConst.curDoc.level}</h1>
+        <h1>Email: {fbConst.firebaseAuth.currentUser.email}</h1>
 
         <div class="flex gap-2">
           <button
