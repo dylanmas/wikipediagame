@@ -69,37 +69,6 @@
     await loadGLTF().then((_model) => (model = _model));
     console.log(model);
   });
-
-  // async function getTheDocument() {
-  //   onAuthStateChanged(firebaseAuth, async (user) => {
-  //     if (user) {
-  //       // userText = "User Logged In: " + user.email;
-  //       const docRef = doc(db, "users", user.uid);
-  //       const docSnap = await getDoc(docRef);
-
-  //       if (docSnap.exists()) {
-  //         console.log("Document data:", docSnap.data());
-  //       } else {
-  //         // docSnap.data() will be undefined in this case
-  //         console.log("No such document!");
-  //       }
-
-  //       docSnapData = docSnap.data();
-  //       loaded = true;
-
-  //       numWins = docSnap.data().wins;
-  //       numPlays = docSnap.data().plays;
-  //       userLevel = docSnap.data().level;
-  //       return docSnap.data();
-  //     } else {
-  //       console.log("You aren't logged in.");
-  //       return null;
-  //     }
-  //   });
-  // }
-
-  console.log("curDOc " + curDoc);
-  console.log(curDoc);
 </script>
 
 {#if model}
