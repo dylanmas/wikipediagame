@@ -21,7 +21,7 @@
   let docSnapData = "";
 
   if (fbConst.docLoaded) {
-    docSnapData = curDocument.data();
+    docSnapData = fbConst.curDoc;
   }
 
   let loaded = false;
