@@ -11,6 +11,50 @@ html {
     height: 100%;
 }
 
+.mw-parser-output {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mw-headline {
+  margin-top: 2rem;
+  margin-bottom: 1rem; 
+font-size: 1.875rem;
+line-height: 2.25rem; 
+font-weight: 700; 
+}
+
+.image {
+  border-radius: 0.5rem; 
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+}
+
+.thumbcaption {
+
+}
+
+p {
+  margin: 1rem;
+}
+
+.infobox {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem; 
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+  background: rgb(229, 229, 229);    
+}
+
+.mw-editsection {
+  display: none;
+}
+
+a {
+  color: blue;
+  font-weight: bold;
+}
+
 .transition-in {
   animation: emerge 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }

@@ -3,7 +3,7 @@
   import * as SC from "svelte-cubed";
   import wtf from 'wtf_wikipedia';
   import { onMount } from 'svelte';
-  import { path_val } from "../../stores.js";
+  import { path_val } from "../stores.js";
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
 
@@ -71,10 +71,10 @@
     console.log(sections);
   }
 
-  var link = "https://en.wikipedia.org/wiki/Google";
+  var link = "";
 
   var goToArticle2 = (query) => {
-    fetch(`https://en.wikipedia.org/w/api.php?action=parse&prop=text|images&page=google&format=json&origin=*`, {
+    fetch(`https://en.wikipedia.org/w/api.php?action=parse&prop=text|images&page=${query}&format=json&origin=*`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -82,14 +82,18 @@
     })
     .then(async (res) => {
       let foo = await res.json();
-      console.log(foo.parse.text['*']);
+      // console.log(foo.parse.text['*']);
 
       link = foo.parse.text['*'];
     })
   }
+
+  var pathStack = [];
+  var pathIndex = 0;
+  var content;
+  let query = "";
   
   onMount(async () => {
-    let query = "";
 
     fetch('https://en.wikipedia.org/w/api.php?action=query&format=json&list=random&rnnamespace=0&rnlimit=1&origin=*', {
       method: "GET",
@@ -107,16 +111,24 @@
       goToArticle2(query);
     })
 
-    let foo = $page.url.pathname;
-    foo = foo.substring(foo.indexOf("/") + 1);
-    foo = foo.substring(foo.indexOf("/") + 1);
-
-    $page.url.pathname.subscribe()
-
-    // path_val.update((previous) => previous += foo + "``");
     // path_val.subscribe((n) => {console.log(n)});
-  })
+    
+    page.subscribe((n) => {
+      let foo = n.url.pathname;
+      foo = foo.substring(foo.indexOf("/") + 1);
+      foo = foo.substring(foo.indexOf("/") + 1);
+      path_val.update((previous) => previous += foo + "``");
 
+      let foo2 = foo.replaceAll("_", " ");
+
+      pathStack.unshift(foo2);
+      pathStack = pathStack;
+      console.log(pathStack);
+
+      goToArticle2(foo);
+      content.scrollTop = 0;
+    })
+  })
 </script>
 
 <SC.Canvas
@@ -143,7 +155,7 @@
 
 <div
   class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transition-in"
-> {foo}
+>
   <div class="flex-col bg-black p-4 gap-4 rounded-lg shadow-lg items-center">
     <div class="flex items-center gap-2">
         <img src="https://picsum.photos/500/500" class="w-14 h-14 rounded-full shadow-md border-4 border-blue-500" />
@@ -159,7 +171,7 @@
         <div
           class="bg-black backdrop-blur-md bg-opacity-70 rounded-lg shadow-lg p-4 w-[300px] flex flex-col items-center gap-4"
         >
-          <h1 class="text-4xl">Article 1</h1>
+          <h1 class="text-4xl">{query}</h1>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
         <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z" clip-rule="evenodd" />
         </svg>
@@ -167,20 +179,27 @@
         </div>
 
         <div
-          class="bg-black backdrop-blur-md bg-opacity-70  rounded-lg shadow-lg p-4 w-[300px] flex flex-col items-center gap-4"
+          class="bg-black backdrop-blur-md bg-opacity-70  rounded-lg shadow-lg p-4 w-[300px] flex flex-col items-center gap-1"
         >
-          <h1 class="text-5xl mb-auto">00 steps</h1>
-        
+          <h1 class="text-5xl mb-4">{pathStack.length} step{pathStack.length == 1 ? "" : "s"}</h1>
+          {#each pathStack as pathStack, i}
+          {#if i != 0}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+          </svg>
+          {/if}
+          <h1 class="p-2 font-bold text-lg bg-black rounded-md shadow-lg text-wrap w-[275px] overflow-clip">{pathStack}</h1>
+          {/each}
         </div>
     </div>
 
     <div
-      class="bg-white w-full h-full backdrop-blur-md bg-opacity-70 text-black rounded-lg shadow-lg flex flex-col gap-2 p-4"
+      class="bg-white w-full h-full backdrop-blur-md bg-opacity-70 text-black rounded-lg shadow-lg flex flex-col p-2"
     >
     
       <h1 class="font-bold text-3xl">{title}</h1>
       <div class="flex flex-col items-center gap-2 h-full">
-        <div class="overflow-y-auto overflow-x-hidden">
+        <div bind:this={content} class="content overflow-y-auto overflow-x-hidden">
           {@html link}
         </div>
         <!-- {#each sections as sectionInfo} 
@@ -191,3 +210,5 @@
     </div>
   </div>
 </div>
+
+<slot> </slot>

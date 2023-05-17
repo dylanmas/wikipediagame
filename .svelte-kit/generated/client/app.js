@@ -9,18 +9,21 @@ export const nodes = [
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
 	() => import('./nodes/7'),
-	() => import('./nodes/8')
+	() => import('./nodes/8'),
+	() => import('./nodes/9'),
+	() => import('./nodes/10')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
-		"/": [3],
-		"/login": [4],
-		"/parseenv": [5],
-		"/play": [6,[2]],
-		"/profile": [7],
-		"/signup": [8]
+		"/": [4],
+		"/login": [5],
+		"/parseenv": [6],
+		"/play": [7,[2]],
+		"/profile": [8],
+		"/signup": [9],
+		"/wiki/[articleName]": [10,[3]]
 	};
 
 export const hooks = {
