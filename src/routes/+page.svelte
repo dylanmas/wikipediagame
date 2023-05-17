@@ -34,10 +34,8 @@
   function goToSignUp() {
     if (firebaseAuth.currentUser) {
       goto("/profile");
-      console.log("User is signed in");
     } else {
       goto("/login");
-      console.log("User is signed out");
     }
   }
 
@@ -46,11 +44,8 @@
       userText = firebaseAuth.currentUser.email;
 
       if (curDoc != "") {
-        console.log("Document data:", curDoc);
         userText = curDoc.username;
       } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
         userText = firebaseAuth.currentUser.email;
       }
     } else {
