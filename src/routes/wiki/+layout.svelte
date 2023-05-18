@@ -26,7 +26,6 @@
   });
 
   var tmp = "";
-  
   var sections = [];
 
   const goToArticle = async (articleName) => {
@@ -92,6 +91,7 @@
   var pathIndex = 0;
   var content;
   let query = "";
+  var seconds = 0;
   
   onMount(async () => {
 
@@ -129,6 +129,10 @@
       content.scrollTop = 0;
     })
   })
+
+  setInterval(() => {
+    seconds++;
+  }, 1000);
 </script>
 
 <SC.Canvas
@@ -162,20 +166,20 @@
         <img src="https://picsum.photos/500/501" class="w-14 h-14 rounded-full shadow-md border-4 border-red-500" />
         <img src="https://picsum.photos/500/502" class="w-14 h-14 rounded-full shadow-md border-4 border-blue-500" />
         <div class="w-full"></div>
-        <h1 class="text-5xl font-bold">0:00</h1>
+        <h1 class="text-5xl font-bold font-mono px-4 pt-2 pb-1 bg-neutral-800 rounded-md">{seconds < 10 ? "0" : ""}{seconds}</h1>
     </div>
 </div>
 
 <div class="h-full flex gap-4 overflow-clip">
     <div class="flex flex-col gap-4">
         <div
-          class="bg-black backdrop-blur-md bg-opacity-70 rounded-lg shadow-lg p-4 w-[300px] flex flex-col items-center gap-4"
+          class="bg-black backdrop-blur-md bg-opacity-70 rounded-lg shadow-lg p-4 w-[300px] flex flex-col-reverse items-center gap-2"
         >
-          <h1 class="text-4xl">{query}</h1>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-        <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v16.19l6.22-6.22a.75.75 0 111.06 1.06l-7.5 7.5a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 111.06-1.06l6.22 6.22V3a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+          <h1 class="text-2xl text-center">{query}</h1>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
         </svg>
-          <h1 class="font-bold text-5xl">Article 2</h1>
+          <h1 class="font-bold text-3xl text-center">Wikipedia</h1>
         </div>
 
         <div
