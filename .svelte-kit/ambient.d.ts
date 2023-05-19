@@ -26,8 +26,6 @@
  * ```
  */
 declare module '$env/static/private' {
-	export const NVM_INC: string;
-	export const MANPATH: string;
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
