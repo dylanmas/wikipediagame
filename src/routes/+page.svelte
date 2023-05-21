@@ -101,6 +101,7 @@
               <img
                 class="w-14 h-14 mr-2 shadow-md rounded-full"
                 src="https://picsum.photos/600/600"
+                alt="User's profile pic"
               />
               {userText}
             </button>
