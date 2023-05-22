@@ -177,7 +177,11 @@
                 <button
                   class="rounded-l-lg h-48 w-full shadow-md bg-red-500 overflow-clip text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:"
                 >
-                  <img class="w-full" src="https://picsum.photos/500/500" />
+                  <img
+                    class="w-full"
+                    src="https://picsum.photos/500/500"
+                    alt="random profile pic"
+                  />
                 </button>
                 <button
                   class="rounded-r-lg shadow-md p-2 bg-neutral-800 overflow-clip text-white transition-all duration-250 hover:border-4 hover:bg-red-900 hover:shadow-blue-500 hover:scale-105 active:scale-95 hover:accent-blue-500 hover:shadow-xl border-blue-500 hover:"
