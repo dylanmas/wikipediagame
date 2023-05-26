@@ -88,12 +88,12 @@ a {
 }
 
 .wipein {
-  animation: wipe-in 1s;
+  animation: wipe-in 0.2s;
 }
 
 @keyframes wipe-in {
   0%{
-    transform: translateX(-5%);
+    transform: translateX(-10%);
     filter: opacity(0%);
   }
   100%{

@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/wiki/+layout.svelte";
+export { default as component } from "../../../../src/routes/wiki/[articleName]/+layout.svelte";
