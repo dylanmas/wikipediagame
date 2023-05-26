@@ -12,6 +12,7 @@
 
   var sectionsInfo = "";
   var title = "";
+  var link = "";
 
   SC.onFrame(() => {
     if (vel) {

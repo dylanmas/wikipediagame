@@ -15,8 +15,6 @@
       .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
-        localStorage.setItem("uid", user.uid);
-        localStorage.setItem("isLoggedIn", true);
 
         await getTheDoc();
         goto("/");

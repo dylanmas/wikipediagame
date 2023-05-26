@@ -21,7 +21,7 @@
   let docSnapData = "";
 
   if (fbConst.docLoaded) {
-    docSnapData = curDocument.data();
+    docSnapData = fbConst.curDoc;
   }
 
   let loaded = false;
@@ -29,16 +29,12 @@
   var showChangeUsername = false;
 
   onMount(async () => {
-    console.log("on mount");
     loaded = true;
   });
 
   function handleSignOut() {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
-        localStorage.setItem("uid", null);
-        localStorage.setItem("isLoggedIn", false);
         fbConst.removeCurDoc();
         goto("/");
       })
@@ -54,15 +50,12 @@
 
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
-      console.log(newUsername + "    " + doc.data().username);
       if (newUsername == doc.data().username) {
-        console.log("name in use");
         return;
       }
     });
 
     if (newUsername != userConfirm) {
-      console.log("the passwords are different");
       return;
     }
 

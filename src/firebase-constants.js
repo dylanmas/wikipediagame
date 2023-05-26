@@ -55,6 +55,7 @@ export async function getTheDoc() {
 
     if (tempDoc.exists()) {
       curDoc = tempDoc.data();
+      docLoaded = true;
     }
 
     console.log("got the data");
