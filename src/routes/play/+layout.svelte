@@ -3,6 +3,9 @@
   import * as SC from "svelte-cubed";
   import wtf from 'wtf_wikipedia';
   import { onMount } from 'svelte';
+  import { path_val } from "../../stores.js";
+  import { page } from "$app/stores";
+  import { goto } from "$app/navigation";
 
   let spin = 2;
   let vel = true;
@@ -69,10 +72,21 @@
     console.log(sections);
   }
 
-  var link = "";
+  var link = "https://en.wikipedia.org/wiki/Google";
 
   var goToArticle2 = (query) => {
+    fetch(`https://en.wikipedia.org/w/api.php?action=parse&prop=text|images&page=google&format=json&origin=*`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(async (res) => {
+      let foo = await res.json();
+      console.log(foo.parse.text['*']);
 
+      link = foo.parse.text['*'];
+    })
   }
   
   onMount(async () => {
@@ -93,6 +107,15 @@
       // goToArticle(query);
       goToArticle2(query);
     })
+
+    let foo = $page.url.pathname;
+    foo = foo.substring(foo.indexOf("/") + 1);
+    foo = foo.substring(foo.indexOf("/") + 1);
+
+    $page.url.pathname.subscribe()
+
+    // path_val.update((previous) => previous += foo + "``");
+    // path_val.subscribe((n) => {console.log(n)});
   })
 
 </script>
@@ -121,7 +144,7 @@
 
 <div
   class="h-[100vh] w-full flex flex-col p-4 gap-4 z-10 text-white absolute transition-in"
->
+> {foo}
   <div class="flex-col bg-black p-4 gap-4 rounded-lg shadow-lg items-center">
     <div class="flex items-center gap-2">
         <img src="https://picsum.photos/500/500" class="w-14 h-14 rounded-full shadow-md border-4 border-blue-500" />
@@ -155,12 +178,16 @@
     <div
       class="bg-white w-full h-full backdrop-blur-md bg-opacity-70 text-black rounded-lg shadow-lg flex flex-col gap-2 p-4"
     >
+    
       <h1 class="font-bold text-3xl">{title}</h1>
       <div class="flex flex-col items-center gap-2 h-full">
+        <div class="overflow-y-auto overflow-x-hidden">
+          {@html link}
+        </div>
         <!-- {#each sections as sectionInfo} 
         <h1 class="text-left mr-auto">{sectionInfo}</h1>
         {/each} -->
-        <iframe bind:src={link} id="iframeInner" class="w-full h-full rounded-lg shadow-lg font-bold backdrop-opacity-100" />
+        <!-- <iframe src={link} id="iframeInner" class="w-full h-full rounded-lg shadow-lg font-bold backdrop-opacity-100" /> -->
       </div>
     </div>
   </div>

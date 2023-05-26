@@ -26,6 +26,7 @@
  * ```
  */
 declare module '$env/static/private' {
+
 	export const TERM_PROGRAM: string;
 	export const NODE: string;
 	export const INIT_CWD: string;
@@ -79,8 +80,7 @@ declare module '$env/static/private' {
 	export const GIT_ASKPASS: string;
 	export const SECURITYSESSIONID: string;
 	export const npm_node_execpath: string;
-	export const npm_config_prefix: string;
-	export const COLORTERM: string;
+	export const OLDPWD: string;
 	export const NODE_ENV: string;
 }
 
@@ -129,11 +129,13 @@ declare module '$env/dynamic/private' {
 		USER: string;
 		COMMAND_MODE: string;
 		npm_config_globalconfig: string;
-		SSH_AUTH_SOCK: string;
-		__CF_USER_TEXT_ENCODING: string;
-		npm_execpath: string;
-		PATH: string;
-		npm_package_json: string;
+		EDITOR: string;
+		PWD: string;
+		XDG_SESSION_DESKTOP: string;
+		LOGNAME: string;
+		XDG_SESSION_TYPE: string;
+		npm_config_init_module: string;
+		SYSTEMD_EXEC_PID: string;
 		_: string;
 		LaunchInstanceID: string;
 		npm_config_userconfig: string;
@@ -164,8 +166,7 @@ declare module '$env/dynamic/private' {
 		GIT_ASKPASS: string;
 		SECURITYSESSIONID: string;
 		npm_node_execpath: string;
-		npm_config_prefix: string;
-		COLORTERM: string;
+		OLDPWD: string;
 		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: string]: string | undefined;
