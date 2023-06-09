@@ -23,15 +23,12 @@
 
     const querySnapshot = await getDocs(collection(db, "users"));
     querySnapshot.forEach((doc) => {
-      console.log(name + "    " + doc.data().username);
       if (name == doc.data().username) {
-        console.log("name in use");
         return;
       }
     });
 
     if (password != passConfirm) {
-      console.log("the passwords are different");
       return;
     }
 
@@ -52,7 +49,6 @@
             level: 1,
           });
 
-          console.log("wrote to document");
 
           goto("/");
         } catch (e) {

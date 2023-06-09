@@ -45,7 +45,6 @@ export async function updateDoc() {
     curDoc = await getDoc(doc(db, "users", firebaseAuth.currentUser.uid));
   } else {
     docLoaded = false;
-    console.log(docLoaded);
   }
 }
 
@@ -57,8 +56,6 @@ export async function getTheDoc() {
       curDoc = tempDoc.data();
       docLoaded = true;
     }
-
-    console.log("got the data");
   }
 }
 
