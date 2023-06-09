@@ -11,8 +11,57 @@ html {
     height: 100%;
 }
 
+.mw-parser-output {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mw-headline {
+  margin-top: 2rem;
+  margin-bottom: 1rem; 
+font-size: 1.875rem;
+line-height: 2.25rem; 
+font-weight: 700; 
+}
+
+.image {
+  border-radius: 0.5rem; 
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+}
+
+.thumbcaption {
+
+}
+
+p {
+  margin: 1rem;
+}
+
+.infobox {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem; 
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+  background: rgb(229, 229, 229);    
+}
+
+.mw-editsection {
+  display: none;
+}
+
+a {
+  color: blue;
+  font-weight: bold;
+}
+
 .transition-in {
   animation: emerge 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.transition-out {
+  animation: emerge 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  animation-direction: reverse;
 }
 
 @keyframes emerge {
@@ -22,5 +71,33 @@ html {
 
   100% {
     transform: translateY(0%);
+  }
+}
+
+.imagepan {
+  animation: slowzoom 10s;
+}
+
+@keyframes slowzoom {
+  0% {
+    transform: scaleX(120%) scaleY(120%);
+  }
+  100% {
+    transform: scaleX(100%) scaleY(100%);
+  }
+}
+
+.wipein {
+  animation: wipe-in 0.2s;
+}
+
+@keyframes wipe-in {
+  0%{
+    transform: translateX(-10%);
+    filter: opacity(0%);
+  }
+  100%{
+    transform: translateX(0%);
+    filter: opacity(100%);
   }
 }
